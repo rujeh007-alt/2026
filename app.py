@@ -82,4 +82,4 @@ else:
     except:
         # Backup if the file upload didn't work
         st.header("❤️❤️❤️❤️❤️❤️")
-        st.write("https://tenor.com/search/wolf-of-wall-street-cheers-gifs")
+        st.write("https://tenor.com/bedMo.gif")
