@@ -13,7 +13,7 @@ if 'deal_closed' not in st.session_state:
 with st.sidebar:
     st.info("🔒 **CLASSIFIED DOCUMENT**")
     st.markdown("**Subject:** You & Me")
-    st.markdown("**Analyst:** [Your Name]") 
+    st.markdown("**Analyst:** Rujeh Refaat") 
     st.divider()
     st.write("This report analyzes the potential future of us hanging out on Feb 14th.")
 
