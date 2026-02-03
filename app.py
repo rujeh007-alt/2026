@@ -21,7 +21,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("**Deal Code:** VALENTINE-2026")
     st.markdown("**Target Company:** YOU")
-    st.markdown("**Analyst:** [YOUR NAME HERE]") # <--- Put your name here
+    st.markdown("**Analyst:** Rujeh Refaat") # <--- Put your name here
     st.markdown("**Rating:** STRONG BUY")
     st.markdown("---")
 
@@ -82,4 +82,4 @@ else:
     except:
         # Backup if the file upload didn't work
         st.header("❤️❤️❤️❤️❤️❤️")
-        st.write("Imagination required: Insert Wolf of Wall Street cheering here!")
+        st.write("https://tenor.com/search/wolf-of-wall-street-cheers-gifs")
