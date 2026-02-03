@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 
-# 1. Page Config
+# --- 1. SETUP & PAGE CONFIG ---
 st.set_page_config(
     page_title="Investment Memo: PROJ-1402", 
     page_icon="📈", 
@@ -10,7 +11,22 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. Sidebar
+# --- 2. THE IMAGE FIX (The Magic Part) ---
+# This function forces the app to download the image so it CANNOT fail.
+def get_image_path():
+    image_path = "success_fixed.gif"
+    # If the image isn't already there, download it from a safe mirror
+    if not os.path.exists(image_path):
+        import urllib.request
+        # This is the direct link to the "Wolf of Wall Street" clapping GIF
+        url = "https://media.giphy.com/media/l41lZxzroU33typuU/giphy.gif"
+        try:
+            urllib.request.urlretrieve(url, image_path)
+        except:
+            return None # Fallback if internet fails
+    return image_path
+
+# --- 3. SIDEBAR ---
 with st.sidebar:
     st.header("🔒 CONFIDENTIAL")
     st.warning("⚠️ RESTRICTED ACCESS")
@@ -22,17 +38,17 @@ with st.sidebar:
     st.markdown("---")
     st.write("© 2026 Institutional Research")
 
-# 3. Session State
+# --- 4. SESSION STATE ---
 if 'deal_closed' not in st.session_state:
     st.session_state.deal_closed = False
 
-# 4. Main App
+# --- 5. MAIN APP CONTENT ---
 if not st.session_state.deal_closed:
     st.title("🚀 Strategic Partnership Proposal")
     st.markdown("### Executive Summary: Merger Opportunity")
     st.write("The analyst team (me) has identified a high-synergy opportunity with unlimited upside potential. Immediate execution is recommended.")
     
-    # Metrics
+    # Financial Metrics
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Projected Happiness", "Infinite", "+100% 🚀")
     col2.metric("Loneliness Risk", "0.00%", "-100% ▼")
@@ -40,8 +56,8 @@ if not st.session_state.deal_closed:
     col4.metric("Cost of Capital", "1 Dinner", "Feb 14")
 
     st.markdown("---")
-    
-    # Chart
+
+    # The Chart
     st.subheader("📈 Historical Performance & Forecast")
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=['Chemistry', 'Vibes', 'Attraction'])
     chart_data['Chemistry'] = chart_data['Chemistry'].cumsum() + 50
@@ -51,7 +67,7 @@ if not st.session_state.deal_closed:
 
     st.markdown("---")
 
-    # Buttons
+    # The Buttons
     st.subheader("📝 Investment Committee Decision")
     c1, c2 = st.columns([1, 2])
     
@@ -78,13 +94,11 @@ else:
     4. **Dress Code:** Look amazing (as always).
     """)
     
-    # --- THE FIX: RAW HTML ---
-    # This forces the browser to load the GIF directly, bypassing Streamlit's blockers.
-    st.markdown(
-        """
-        <div style="display: flex; justify-content: center;">
-            <img src="https://media.tenor.com/qW7tHv-F2_gAAAAC/jordan-belfort-leonardo-dicaprio.gif" width="100%" style="max-width: 600px; border-radius: 10px;">
-        </div>
-        """, 
-        unsafe_allow_html=True
-    )
+    # DISPLAY THE IMAGE (Robust Method)
+    img_path = get_image_path()
+    if img_path and os.path.exists(img_path):
+        st.image(img_path, caption="Live footage of me right now")
+    else:
+        # Absolute fallback if even the download fails
+        st.header("🥂 CHEERS! 🥂")
+        st.write("(*Insert Wolf of Wall Street celebration here*)")
