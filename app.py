@@ -78,4 +78,5 @@ else:
     3. **Dress Code:** Look amazing (as always)
     """)
     
-    st.image("https://media.giphy.com/media/l0amJbWGZhXVLO1vsP/giphy.gif")
+  # This is a more stable link for the 'Wolf of Wall Street' celebration
+st.image("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6bWJ6ZHg4d3J6ZHg4d3J6ZHg4d3J6ZHg4d3J6ZHg4d3J6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HU7yHIK6DCCxjOB/giphy.gif")
