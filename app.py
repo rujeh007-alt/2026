@@ -90,4 +90,7 @@ else:
     """)
     
     # STABLE IMAGE LINK (Using a reliable Tenor GIF instead of Giphy)
-    st.image("
+    st.image("https://media.tenor.com/qW7tHv-F2_gAAAAC/jordan-belfort-leonardo-dicaprio.gif", caption="Live footage of me right now")
+    
+    # Alternative Text if image fails
+    st.info("Market Sentiment: EXTREMELY BULLISH 🐂")
