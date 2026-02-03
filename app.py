@@ -2,8 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import urllib.request
 
-# --- 1. SETUP & PAGE CONFIG ---
+# --- 1. PAGE CONFIG ---
 st.set_page_config(
     page_title="Investment Memo: PROJ-1402", 
     page_icon="📈", 
@@ -11,19 +12,20 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- 2. THE IMAGE FIX (The Magic Part) ---
-# This function forces the app to download the image so it CANNOT fail.
+# --- 2. IMAGE DOWNLOADER (The Fix) ---
+# This function downloads the Wolf of Wall Street GIF so it never breaks
 def get_image_path():
-    image_path = "success_fixed.gif"
-    # If the image isn't already there, download it from a safe mirror
+    image_path = "wolf_celebration.gif"
+    
+    # Direct link to Wolf of Wall Street Clapping/Cheering
+    url = "https://media.giphy.com/media/l0HU7yHIK6DCCxjOB/giphy.gif"
+    
     if not os.path.exists(image_path):
-        import urllib.request
-        # This is the direct link to the "Wolf of Wall Street" clapping GIF
-        url = "https://media.giphy.com/media/l41lZxzroU33typuU/giphy.gif"
         try:
+            # Download it to the server
             urllib.request.urlretrieve(url, image_path)
         except:
-            return None # Fallback if internet fails
+            return None
     return image_path
 
 # --- 3. SIDEBAR ---
@@ -42,13 +44,13 @@ with st.sidebar:
 if 'deal_closed' not in st.session_state:
     st.session_state.deal_closed = False
 
-# --- 5. MAIN APP CONTENT ---
+# --- 5. MAIN APP ---
 if not st.session_state.deal_closed:
     st.title("🚀 Strategic Partnership Proposal")
     st.markdown("### Executive Summary: Merger Opportunity")
     st.write("The analyst team (me) has identified a high-synergy opportunity with unlimited upside potential. Immediate execution is recommended.")
     
-    # Financial Metrics
+    # Metrics
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Projected Happiness", "Infinite", "+100% 🚀")
     col2.metric("Loneliness Risk", "0.00%", "-100% ▼")
@@ -56,8 +58,8 @@ if not st.session_state.deal_closed:
     col4.metric("Cost of Capital", "1 Dinner", "Feb 14")
 
     st.markdown("---")
-
-    # The Chart
+    
+    # Chart
     st.subheader("📈 Historical Performance & Forecast")
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=['Chemistry', 'Vibes', 'Attraction'])
     chart_data['Chemistry'] = chart_data['Chemistry'].cumsum() + 50
@@ -67,7 +69,7 @@ if not st.session_state.deal_closed:
 
     st.markdown("---")
 
-    # The Buttons
+    # Buttons
     st.subheader("📝 Investment Committee Decision")
     c1, c2 = st.columns([1, 2])
     
@@ -94,11 +96,10 @@ else:
     4. **Dress Code:** Look amazing (as always).
     """)
     
-    # DISPLAY THE IMAGE (Robust Method)
+    # Show the Wolf of Wall Street GIF
     img_path = get_image_path()
-    if img_path and os.path.exists(img_path):
-        st.image(img_path, caption="Live footage of me right now")
+    if img_path:
+        st.image(img_path, caption="Live footage of the trading floor")
     else:
-        # Absolute fallback if even the download fails
-        st.header("🥂 CHEERS! 🥂")
-        st.write("(*Insert Wolf of Wall Street celebration here*)")
+        st.write("🥂 CHEERS! (Image failed to load, but the sentiment is real!)")
+        
