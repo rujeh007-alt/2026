@@ -7,22 +7,21 @@ import urllib.request
 # --- 1. PAGE CONFIG ---
 st.set_page_config(
     page_title="Investment Memo: PROJ-1402", 
-    page_icon="📈", 
+    page_icon="🥂", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# --- 2. IMAGE DOWNLOADER (The Fix) ---
-# This function downloads the Wolf of Wall Street GIF so it never breaks
+# --- 2. IMAGE DOWNLOADER ---
 def get_image_path():
-    image_path = "wolf_celebration.gif"
+    image_path = "gatsby_toast.gif"
     
-    # Direct link to Wolf of Wall Street Clapping/Cheering
-    url = "https://media.giphy.com/media/l0HU7yHIK6DCCxjOB/giphy.gif"
+    # The Great Gatsby Toast - Classy & Perfect for a "Merger"
+    url = "https://media.giphy.com/media/8Iv5lqKwKsZ2g/giphy.gif"
     
     if not os.path.exists(image_path):
         try:
-            # Download it to the server
+            # Download to server so it never breaks
             urllib.request.urlretrieve(url, image_path)
         except:
             return None
@@ -50,7 +49,7 @@ if not st.session_state.deal_closed:
     st.markdown("### Executive Summary: Merger Opportunity")
     st.write("The analyst team (me) has identified a high-synergy opportunity with unlimited upside potential. Immediate execution is recommended.")
     
-    # Metrics
+    # Financial Metrics
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Projected Happiness", "Infinite", "+100% 🚀")
     col2.metric("Loneliness Risk", "0.00%", "-100% ▼")
@@ -85,21 +84,19 @@ if not st.session_state.deal_closed:
 else:
     # --- SUCCESS SCREEN ---
     st.balloons()
-    st.title("🎉 DEAL CONFIRMED!")
-    st.success("The merger has been approved by the board! Trading is halted for celebration.")
+    st.title("🥂 DEAL CLOSED!")
+    st.success("The merger has been approved by the board!")
     
     st.markdown("""
     ### 📂 Next Steps:
-    1. **Due Diligence:** Completed successfully.
+    1. **Due Diligence:** Completed.
     2. **Closing Date:** February 14th, 2026.
     3. **Venue:** To be disclosed (I'm picking you up).
-    4. **Dress Code:** Look amazing (as always).
     """)
     
-    # Show the Wolf of Wall Street GIF
+    # Show the Gatsby GIF
     img_path = get_image_path()
     if img_path:
-        st.image(img_path, caption="Live footage of the trading floor")
+        st.image(img_path, caption="Here's to us.")
     else:
-        st.write("🥂 CHEERS! (Image failed to load, but the sentiment is real!)")
-        
+        st.write("🥂 CHEERS! (Imagine Leonardo DiCaprio toasting you right now)")
