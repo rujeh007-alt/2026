@@ -2,84 +2,92 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# 1. Page Config
-st.set_page_config(page_title="Official Proposal", page_icon="🌹", layout="wide")
+# 1. Page Configuration (The "Bloomberg Terminal" look)
+st.set_page_config(
+    page_title="Investment Memo: PROJ-1402", 
+    page_icon="📈", 
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-# 2. Session State
+# 2. Session State Management
 if 'deal_closed' not in st.session_state:
     st.session_state.deal_closed = False
 
-# 3. Sidebar (Simplified)
+# 3. Sidebar - The "Analyst Report"
 with st.sidebar:
-    st.info("🔒 **CLASSIFIED DOCUMENT**")
-    st.markdown("**Subject:** You & Me")
-    st.markdown("**Analyst:** Rujeh Refaat") 
-    st.divider()
-    st.write("This report analyzes the potential future of us hanging out on Feb 14th.")
+    st.header("🔒 CONFIDENTIAL")
+    st.info("⚠️ This document contains forward-looking statements regarding your happiness.")
+    st.markdown("---")
+    st.markdown("**Deal Code:** VALENTINE-2026")
+    st.markdown("**Target Company:** YOU")
+    st.markdown("**Analyst:** [YOUR NAME HERE]") # <--- UPDATE THIS!
+    st.markdown("**Rating:** STRONG BUY")
+    st.markdown("---")
+    st.write("© 2026 Institutional Research")
 
-# 4. Main Header
+# 4. Main Application Logic
 if not st.session_state.deal_closed:
-    st.title("📊 Strategic Partnership Proposal")
-    st.markdown("### Executive Summary: Why we should be technically dating")
+    # --- THE PITCH ---
+    st.title("🚀 Strategic Partnership Proposal")
+    st.markdown("### Executive Summary: Merger Opportunity")
+    st.write("The analyst team has identified a high-synergy opportunity with unlimited upside potential. Immediate execution is recommended.")
     
-    # 5. Metrics (Translated to Normal English)
+    # Financial Metrics (The Funny Part)
     col1, col2, col3, col4 = st.columns(4)
-    # Instead of "Yield", use "Fun Level"
-    col1.metric("Predicted Fun", "Maximum", "Off the charts 📈")
-    # Instead of "Risk", use "Boredom"
-    col2.metric("Boredom Risk", "0.00%", "-100% ▼")
-    # Instead of "Synergy", use "Vibe Check"
-    col3.metric("Vibe Check", "Immaculate", "Stable")
-    # Keep this one, it's funny
-    col4.metric("Cost to You", "0 EGP", "I'm Paying")
+    col1.metric("Projected Happiness", "Infinite", "+100% 🚀")
+    col2.metric("Loneliness Risk", "0.00%", "-100% ▼")
+    col3.metric("Synergy Rating", "AAA+", "Stable")
+    col4.metric("Cost of Capital", "1 Dinner", "Feb 14")
 
-    # 6. The Chart (Keep it, everyone loves lines going up)
-    st.subheader("Projected Happiness Levels")
+    st.markdown("---")
+
+    # The "Stock Chart" (Always going up)
+    st.subheader("📈 Historical Performance & Forecast")
     
+    # create fake data that trends upwards
     chart_data = pd.DataFrame(
         np.random.randn(20, 3),
-        columns=['Laughter', 'Memories', 'Cute Moments']
+        columns=['Chemistry', 'Vibes', 'Attraction']
     )
-    chart_data['Laughter'] = chart_data['Laughter'].cumsum() + 50
-    chart_data['Memories'] = chart_data['Memories'].cumsum() + 50
-    chart_data['Cute Moments'] = chart_data['Cute Moments'].cumsum() + 50
+    # math to make the lines go up
+    chart_data['Chemistry'] = chart_data['Chemistry'].cumsum() + 50
+    chart_data['Vibes'] = chart_data['Vibes'].cumsum() + 50
+    chart_data['Attraction'] = chart_data['Attraction'].cumsum() + 50
     
     st.line_chart(chart_data)
 
-    st.divider()
+    st.markdown("---")
 
-    # 7. The Proposal 
-    st.subheader("📝 Official Recommendation")
-    st.write("Data indicates a 100% probability of a great time.")
-
+    # The Decision Buttons
+    st.subheader("📝 Investment Committee Decision")
+    
     c1, c2 = st.columns([1, 2])
     
     with c1:
-        # Clear "YES" button
-        if st.button("✅ Accept Offer (Yes)", type="primary", use_container_width=True):
+        # The YES Button
+        if st.button("✅ APPROVE MERGER (Yes)", type="primary", use_container_width=True):
             st.session_state.deal_closed = True
             st.rerun()
             
     with c2:
-        # Funny error instead of "Hostile Takeover"
-        if st.button("❌ Decline Offer", use_container_width=True):
-            st.error("System Error: You are too cute to say no. Please try the other button. 😉")
+        # The NO Button
+        if st.button("❌ DECLINE DEAL", use_container_width=True):
+            st.error("⚠️ ERROR 404: Rejection not found. This is a hostile takeover. You must say yes. 😉")
 
 else:
-    # 8. Success Screen
+    # --- THE SUCCESS SCREEN ---
     st.balloons()
-    st.title("🎉 IT'S OFFICIAL!")
-    st.success("The deal is closed!")
+    st.title("🎉 DEAL CONFIRMED!")
+    st.success("The merger has been approved by the board! Trading is halted for celebration.")
     
     st.markdown("""
-    ### The Plan:
-    1. **Date:** February 14th
-    2. **Activity:** Dinner & vibes
-    3. **Dress Code:** Look amazing (as always)
+    ### 📂 Next Steps:
+    1. **Due Diligence:** Completed successfully.
+    2. **Closing Date:** February 14th, 2026.
+    3. **Venue:** To be disclosed (I'm picking you up).
+    4. **Dress Code:** Look amazing (as always).
     """)
     
-  # This is a more stable link for the 'Wolf of Wall Street' celebration
-st.image("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6bWJ6ZHg4d3J6ZHg4d3J6ZHg4d3J6ZHg4d3J6ZHg4d3J6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HU7yHIK6DCCxjOB/giphy.gif")
-
-
-
+    # STABLE IMAGE LINK (Using a reliable Tenor GIF instead of Giphy)
+    st.image("
