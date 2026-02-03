@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# 1. Page Configuration (The "Bloomberg Terminal" look)
+# 1. Page Config
 st.set_page_config(
     page_title="Investment Memo: PROJ-1402", 
     page_icon="📈", 
@@ -10,30 +10,28 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. Session State Management
+# 2. Session State
 if 'deal_closed' not in st.session_state:
     st.session_state.deal_closed = False
 
-# 3. Sidebar - The "Analyst Report"
+# 3. Sidebar
 with st.sidebar:
     st.header("🔒 CONFIDENTIAL")
     st.info("⚠️ This document contains forward-looking statements regarding your happiness.")
     st.markdown("---")
     st.markdown("**Deal Code:** VALENTINE-2026")
     st.markdown("**Target Company:** YOU")
-    st.markdown("**Analyst:** [YOUR NAME HERE]") # <--- UPDATE THIS!
+    st.markdown("**Analyst:** [YOUR NAME HERE]") # <--- Put your name here
     st.markdown("**Rating:** STRONG BUY")
     st.markdown("---")
-    st.write("© 2026 Institutional Research")
 
-# 4. Main Application Logic
+# 4. Main App
 if not st.session_state.deal_closed:
-    # --- THE PITCH ---
     st.title("🚀 Strategic Partnership Proposal")
     st.markdown("### Executive Summary: Merger Opportunity")
     st.write("The analyst team has identified a high-synergy opportunity with unlimited upside potential. Immediate execution is recommended.")
     
-    # Financial Metrics (The Funny Part)
+    # Financial Metrics
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Projected Happiness", "Infinite", "+100% 🚀")
     col2.metric("Loneliness Risk", "0.00%", "-100% ▼")
@@ -42,55 +40,46 @@ if not st.session_state.deal_closed:
 
     st.markdown("---")
 
-    # The "Stock Chart" (Always going up)
+    # Chart
     st.subheader("📈 Historical Performance & Forecast")
-    
-    # create fake data that trends upwards
-    chart_data = pd.DataFrame(
-        np.random.randn(20, 3),
-        columns=['Chemistry', 'Vibes', 'Attraction']
-    )
-    # math to make the lines go up
+    chart_data = pd.DataFrame(np.random.randn(20, 3), columns=['Chemistry', 'Vibes', 'Attraction'])
     chart_data['Chemistry'] = chart_data['Chemistry'].cumsum() + 50
     chart_data['Vibes'] = chart_data['Vibes'].cumsum() + 50
     chart_data['Attraction'] = chart_data['Attraction'].cumsum() + 50
-    
     st.line_chart(chart_data)
 
     st.markdown("---")
 
-    # The Decision Buttons
+    # Buttons
     st.subheader("📝 Investment Committee Decision")
-    
     c1, c2 = st.columns([1, 2])
     
     with c1:
-        # The YES Button
         if st.button("✅ APPROVE MERGER (Yes)", type="primary", use_container_width=True):
             st.session_state.deal_closed = True
             st.rerun()
             
     with c2:
-        # The NO Button
         if st.button("❌ DECLINE DEAL", use_container_width=True):
-            st.error("⚠️ ERROR 404: Rejection not found. This is a hostile takeover. You must say yes. 😉")
+            st.error("⚠️ ERROR 404: Rejection not found. Hostile takeover initiated. Please click Yes. 😉")
 
 else:
-    # --- THE SUCCESS SCREEN ---
+    # --- SUCCESS SCREEN ---
     st.balloons()
     st.title("🎉 DEAL CONFIRMED!")
     st.success("The merger has been approved by the board! Trading is halted for celebration.")
     
     st.markdown("""
     ### 📂 Next Steps:
-    1. **Due Diligence:** Completed successfully.
+    1. **Due Diligence:** Completed.
     2. **Closing Date:** February 14th, 2026.
     3. **Venue:** To be disclosed (I'm picking you up).
-    4. **Dress Code:** Look amazing (as always).
     """)
     
-    # STABLE IMAGE LINK (Using a reliable Tenor GIF instead of Giphy)
-    st.image("https://media.tenor.com/qW7tHv-F2_gAAAAC/jordan-belfort-leonardo-dicaprio.gif", caption="Live footage of me right now")
-    
-    # Alternative Text if image fails
-    st.info("Market Sentiment: EXTREMELY BULLISH 🐂")
+    # THIS IS THE FIX: It looks for the file you uploaded
+    try:
+        st.image("success.gif", caption="Live footage of me right now")
+    except:
+        # Backup if the file upload didn't work
+        st.header("❤️❤️❤️❤️❤️❤️")
+        st.write("Imagination required: Insert Wolf of Wall Street cheering here!")
